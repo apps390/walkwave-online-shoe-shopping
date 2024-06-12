@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<center>
+<h1>Registered User Login Here!</h1>
+ {% if messages %}
+      {% for message in messages %}
+          <h4 style="color:red">{{ message }}</h4>
+      {% endfor %}
+  {% endif %}
+    </center>
+<div class="container" style="width:50%">
+<form method="POST">
+  {% csrf_token %}
+    <div class="form-label">
+    <label for="name">Username</label>
+    <input type="Text" class="form-control" id="name" placeholder="username" name="user">
+  </div>
+  <div class="form-label">
+    <label for="Password1">Password</label>
+    <input type="password" class="form-control" id="Password1" placeholder="password" name="password">
+  </div>
+  <center>
+      <a href="{% url 'home:reqpsw' %}" style="display:block; position:relative;left:290px;font-size:18px;">Forgot Password?</a>
+    <button type="submit" class="btn btn-primary" style="margin-top:10px; margin-left:20px;">Submit</button>
+    </center>
+
+    </form>
+    <center>
+    <a href="{% url 'home:register' %}" style="margin-right:135px;">Don't have an account? <button type="submit" class="btn btn-primary" style="margin-top:10px;">Sign Up</button></a>
+</center>
+</div>
+
+
+{% endblock %}

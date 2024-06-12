@@ -1,0 +1,37 @@
+<body>
+    <h1>Confirm Payment</h1>
+    <form method="post" action="{% url 'cart:complete_pymnt' %}" id="paymentForm">
+        {% csrf_token %}
+        <script
+            src="https://checkout.razorpay.com/v1/checkout.js"
+            data-key="{{ key_id }}"
+            data-amount="{{ payment.amount }}"
+            data-currency="INR"
+            data-order_id="{{ payment.id }}"
+            data-buttontext="Pay with Razorpay"
+            data-name="{{ name }}"
+            data-description="Test Transaction"
+            data-image="https://example.com/your_logo.jpg"
+            data-prefill.name="{{ name }}"
+            data-prefill.email="{{ email }}"
+            data-prefill.contact="{{ phone }}"
+            data-theme.color="#F37254"
+            data-callback_url="{% url 'cart:complete_pymnt' %}"
+        ></script>
+        <input type="hidden" name="hidden" value="Hidden Element">
+        <input type="hidden" id="razorpay_payment_id" name="razorpay_payment_id">
+        <input type="hidden" id="razorpay_order_id" name="razorpay_order_id">
+        <input type="hidden" id="razorpay_signature" name="razorpay_signature">
+    </form>
+
+    <script>
+        document.addEventListener('payment.success', function(event) {
+            var form = document.getElementById('paymentForm');
+            document.getElementById('razorpay_payment_id').value = event.detail.razorpay_payment_id;
+            document.getElementById('razorpay_order_id').value = event.detail.razorpay_order_id;
+            document.getElementById('razorpay_signature').value = event.detail.razorpay_signature;
+            form.submit();
+        });
+    </script>
+</body>
+</html>

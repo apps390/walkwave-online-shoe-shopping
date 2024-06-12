@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<center>
+{% if messages %}
+      {% for message in messages %}
+          <h4 style="color:red">{{ message }}</h4>
+      {% endfor %}
+  {% endif %}
+    </center>
+<div class="container" style="width:50%">
+<h2>PASSWORD RESET</h2>
+<p>Forgotten your password? Enter The username below. We will send you the OTP for setting a new one  </p>
+<form method="POST" style="margin-bottom:25px;">
+    {% csrf_token %}
+      <div class="form-label">
+    <label for="username">Username</label>
+    <input type="text" class="form-control" id="username" placeholder="enter the user name" name="user_data">
+  </div>
+    <button type="submit" class="btn btn-primary" style="margin-top:10px; margin-left:20px;">Submit</button>
+</form>
+    </div>
+
+{% endblock %}

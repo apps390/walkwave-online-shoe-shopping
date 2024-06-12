@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %} Registration Form {% endblock %}</title>
+</head>
+
+<body>
+
+{% block content %}
+<center><h3>Registration Form</h3>
+{% if messages %}
+      {% for i in messages %}
+          <h4 style="color:red">{{ i }}</h4>
+      {% endfor %}
+  {% endif %}
+    </center>
+<div class="container"  style="width:50%" >
+<form method="POST">
+  {% csrf_token %}
+    <div class="form-label">
+    <label for="name">Username</label>
+    <input type="Text" class="form-control" id="name" placeholder="username" name="username">
+  </div>
+  <div class="form-label">
+    <label for="Password1">Password</label>
+    <input type="password" class="form-control" id="Password1" placeholder="minimum 8 characters" name="password">
+  </div>
+
+  <div class="form-label">
+    <label for="Email1">Email address</label>
+    <input type="email" class="form-control" id="Email1" name="email" aria-describedby="emailHelp" placeholder="Enter email">
+  </div>
+   <div class="form-label">
+    <label for="Fname">First name</label>
+    <input type="Text" class="form-control" id="Fname" placeholder="firstname" name="fname">
+  </div>
+   <div class="form-label">
+    <label for="lname">last name</label>
+    <input type="Text" class="form-control" id="lname" placeholder="lastname" name="lname">
+  </div>
+
+   <div class="form-label">
+    <label for="phoneno">phone no</label>
+    <input type="number" class="form-control" id="phoneno" placeholder="enter phone number" name="phn">
+  </div>
+
+<center>
+  <button type="submit" class="btn btn-primary" style="margin-top:10px;">Request OTP</button>
+    </center>
+</form>
+    <center>
+    <a href="{% url 'home:login' %}"><button type="submit" class="btn btn-primary" style="margin-top:10px;">Already Have An Account</button></a>
+</center>
+</div>
+{% endblock %}
+</body>
+</html>

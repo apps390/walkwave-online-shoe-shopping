@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+ <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-xl-3">
+                {% for i in prdt %}
+                        <div class="col-lg-4 mb-4 text-center">
+                            <div class="product-entry border">
+                                <a href="{% url 'shop:prdtdetail' i.id %}" class="prod-img">
+                                    <img src="{{i.img1.url}}" class="img-fluid">
+                                </a>
+                                <div class="desc">
+                                    <h2><a href="#">{{i.product_name}}</a></h2>
+                                    <span class="price">&#8377;{{i.product_price}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+{% endblock %}

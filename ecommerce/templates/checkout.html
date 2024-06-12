@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="breadcrumbs">
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						<p class="bread"><span><a href="{% url 'home:home'%}">Home</a></span> / <span>Checkout</span></p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="colorlib-product">
+			<div class="container">
+				<div class="row row-pb-lg">
+					<div class="col-sm-10 offset-md-1">
+						<div class="process-wrap">
+							<div class="process text-center active">
+								<p><span>01</span></p>
+								<h3>Shopping Cart</h3>
+							</div>
+							<div class="process text-center active">
+								<p><span>02</span></p>
+								<h3>Checkout</h3>
+							</div>
+							<div class="process text-center">
+								<p><span>03</span></p>
+								<h3>Order Complete</h3>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-8">
+						<form method="POST" action="{% url 'cart:initiate_pymnt' %}" class="colorlib-form">
+							{% csrf_token %}
+							<h2>Billing Details</h2>
+		              	<div class="row">
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="fname">First Name</label>
+										<input type="text" id="fname" class="form-control" placeholder="Your firstname" name="name">
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="lname">Last Name</label>
+										<input type="text" id="lname" class="form-control" placeholder="Your lastname">
+									</div>
+								</div>
+
+			               <div class="col-md-12">
+									<div class="form-group">
+										<label for="address">Address</label>
+			                    	<input type="text" id="address" class="form-control" name="addrs1" placeholder="Enter Your Address">
+			                  </div>
+			                  <div class="form-group">
+			                    	<input type="text" id="address2" class="form-control" name="addrs2" placeholder="Second Address">
+			                  </div>
+			               </div>
+
+			               <div class="col-md-12">
+									<div class="form-group">
+										<label for="place">Town/City</label>
+			                    	<input type="text" id="place" class="form-control" name="city" placeholder="Town or City">
+			                  </div>
+			               </div>
+
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="stateprovince">State/Province</label>
+										<input type="text" id="stateprovince" name='state' class="form-control" placeholder="State Province">
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="zippostalcode">Zip/Postal Code</label>
+										<input type="text" id="zippostalcode" class="form-control" placeholder="Zip / Postal">
+									</div>
+								</div>
+
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="email">E-mail Address</label>
+										<input type="text" id="email" name="email" class="form-control" placeholder="enter email address">
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="Phone">Phone Number</label>
+										<input type="number" id="Phone" name="phoneno" class="form-control" placeholder="enter the phone no:">
+									</div>
+								</div>
+		               </div>
+					</div>
+
+					<div class="col-lg-4">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="cart-detail">
+									<h2>Cart Total</h2>
+									<ul>
+										<li>
+											<span>Subtotal</span> <span>{{ttl}}</span>
+										</li>
+										<li><span>Shipping</span> <span>{{dlv}}</span></li>
+										<li><span>Discount</span> <span> {{dis}}</span></li>
+										<li><span>Order Total</span> <span>{{ttl_amnt}}</span></li>
+									</ul>
+								</div>
+						   </div>
+							<div class="row">
+							<div class="col-md-12 text-center">
+							<button type="submit" class="btn btn-primary" style="margin-left:30px;">Make Payment</button>
+							</div>
+						</div>
+						</div>
+							</form>
+					</div>
+				</div>
+			</div>
+		</div>
+				</div>
+			</div>
+		</div>
+{% endblock %}

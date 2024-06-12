@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+		<div class="breadcrumbs">
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						<p class="bread"><span><a href="{% url 'home:home'%}">Home</a></span> / <span>{{c}}</span></p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="breadcrumbs-two">
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						<div class="breadcrumbs-img" style="background-image: url({{b.images.url}});">
+							<h2>{{c}}</h2>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="colorlib-featured" style="margin-top:35px;">
+			<div class="container">
+				<div class="row">
+					{% for i in s %}
+					<div class="col-sm-4 text-center">
+						<div class="featured">
+							<div class="featured-img featured-img-2" style="background-image: url({{i.images.url}});">
+								<h2>{{i.sub_category_name}}</h2>
+								<p><a href="{% url 'shop:sbctg' i.id %}" class="btn btn-primary btn-lg">Shop now</a></p>
+							</div>
+						</div>
+					</div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+<div class="colorlib-product">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-xl-3">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="side border mb-1">
+                            <h3>Price Range</h3>
+                            <ul>
+                                    <li><a href="?price_range=increase">Low To High</a></li>
+                                    <li><a href="?price_range=decrease">High To Low</a></li>
+                            </ul>
+                        </div>
+                        <div class="side border mb-1">
+                            <h3>Brand</h3>
+                            <ul>
+                                {% for i in br %}
+                                    <li><a href="?brand={{i.id}}">{{i.brandname}}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <div class="side border mb-1">
+                            <h3>Color</h3>
+                            <ul>
+                                {% for c in color %}
+                                    <li><a href="?color={{c.id}}">{{c.color}}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Product Display -->
+            <div class="col-lg-9 col-xl-9">
+                <div class="row row-pb-md">
+                    {% for i in p %}
+                        <div class="col-lg-4 mb-4 text-center">
+                            <div class="product-entry border">
+                                <a href="{% url 'shop:prdtdetail' i.id %}" class="prod-img">
+                                    <img src="{{i.img1.url}}" class="img-fluid">
+                                </a>
+                                <div class="desc">
+                                    <h2><a href="#">{{i.product_name}}</a></h2>
+                                    <span class="price">&#8377;{{i.product_price}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

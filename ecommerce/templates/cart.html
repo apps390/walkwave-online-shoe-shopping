@@ -1,0 +1,149 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+	<div class="breadcrumbs">
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						<p class="bread"><span><a href="{% url 'home:home'%}">Home</a></span> / <span>Shopping Cart</span></p>
+					</div>
+				</div>
+			</div>
+		</div>
+<div class="colorlib-product">
+			<div class="container">
+				<div class="row row-pb-lg">
+					<div class="col-md-10 offset-md-1">
+						<div class="process-wrap">
+							<div class="process text-center active">
+								<p><span>01</span></p>
+								<h3>Shopping Cart</h3>
+							</div>
+							<div class="process text-center">
+								<p><span>02</span></p>
+								<h3>Checkout</h3>
+							</div>
+							<div class="process text-center">
+								<p><span>03</span></p>
+								<h3>Order Complete</h3>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row row-pb-lg">
+					<div class="col-md-12">
+						<div class="product-name d-flex">
+							<div class="one-forth text-left px-4">
+								<span>Product Details</span>
+							</div>
+
+							<div class="one-eight text-center">
+								<span>Price</span>
+							</div>
+								<div class="one-eight text-center">
+								<span>Size</span>
+							</div>
+							<div class="one-eight text-center">
+								<span>Quantity</span>
+							</div>
+							<div class="one-eight text-center">
+								<span>Total</span>
+							</div>
+							<div class="one-eight text-center px-4">
+								<span>Remove</span>
+							</div>
+						</div>
+						{% for i in c %}
+						<div class="product-cart d-flex">
+							<div class="one-forth">
+								<div class="product-img" style="background-image: url({{i.product.img1.url}});">
+								</div>
+								<div class="display-tc">
+									<h3 style="font-size:23.5px; margin-right:5px;">{{i.product}}</h3>
+								</div>
+							</div>
+							<div class="one-eight text-center">
+								<div class="display-tc">
+									<span class="price">{{i.product.product_price}}</span>
+								</div>
+							</div>
+							<div class="one-eight text-center">
+								<div class="display-tc">
+									<span class="price">{{i.size.size}}</span>
+								</div>
+							</div>
+							<div class="one-eight text-center">
+								<div class="display-tc">
+									<a href="{% url 'cart:qntyadd' i.product.id i.size.id %}"><i class="fa-solid fa-plus" style="border:1px solid; border-radius:30px;"></i></a>
+									<span class="price" style="font-size:18.5px;">{{i.quantity}}</span>
+									<a href="{% url 'cart:qntyrmv' i.product.id i.size.id %}"><i class="fa-solid fa-minus" style="border:1px solid; border-radius:30px;"></i></a>
+								</div>
+							</div>
+							<div class="one-eight text-center">
+								<div class="display-tc">
+									<span class="price">{{i.subtotal}}</span>
+								</div>
+							</div>
+							<div class="one-eight text-center">
+								<div class="display-tc">
+									<a href="{% url 'cart:rmvitem' i.product.id i.size.id %}" class="closed"></a>
+								</div>
+							</div>
+						</div>
+						{% endfor %}
+					</div>
+					</div>
+				</div>
+	<div class="container">
+        <div class="row row-pb-lg">
+            <div class="col-md-12">
+                <div class="total-wrap">
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <form method="POST" action="{% url 'cart:vwcrt' %}">
+                                {% csrf_token %}
+                                <div class="row form-group">
+                                    <div class="col-sm-9">
+                                        <input type="text" name="coupon" class="form-control input-number" placeholder="Your Coupon Code...">
+                                    </div>
+                                    {% if disc == 0 %}
+                                    <div class="col-sm-3">
+                                        <input type="submit" value="Apply Coupon" class="btn btn-primary">
+                                    </div>
+                                    {% else %}
+                                    <div class="col-sm-3">
+                                        <input type="submit" disabled value="Apply Coupon" class="btn btn-primary">
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-sm-4 text-center">
+                            <div class="total">
+                                <div class="sub">
+                                    <p><span>Subtotal:</span> <span>{{ total }}</span></p>
+                                    <p><span>Delivery:</span> <span>{{ shp_chg }}</span></p>
+                                    <p><span>Discount:</span> <span>{{ disc }}</span></p>
+                                </div>
+                                <div class="grand-total">
+                                    <p><span><strong>Total:</strong></span> <span>{{ subtotal }}</span></p>
+                                    <form method="POST" action="{% url 'cart:chkout' %}">
+                                        {% csrf_token %}
+										<input type="hidden" name="total_amount" value="{{ subtotal }}">
+										<input type="hidden" name="total" value="{{ total }}">
+										<input type="hidden" name="discount" value="{{ disc }}">
+                                        <input type="hidden" name="delivery" value="{{ shp_chg }}">
+                                        <input type="submit" value="Checkout" class="btn btn-primary">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}

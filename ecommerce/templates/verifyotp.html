@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<center>
+ {% if messages %}
+      {% for message in messages %}
+          <h4 style="color:red">{{ message }}</h4>
+      {% endfor %}
+  {% endif %}
+    </center>
+<div class="container" style="width:50%">
+<form method="POST">
+  {% csrf_token %}
+    <div class="form-label">
+    <label for="name">Otp</label>
+    <input type="Text" class="form-control" id="name" placeholder="Enter The OTP" name="otp">
+  </div>
+    <center>
+    <button type="submit" class="btn btn-primary" style="margin-top:10px;">Submit</button>
+    </center>
+</form>
+</div>
+{% endblock %}

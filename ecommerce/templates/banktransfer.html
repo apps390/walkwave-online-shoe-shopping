@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+	<div class="container">
+<div class="row" style="margin:auto; margin-left:110px; margin-top:50px; ">
+					<div class="col-px">
+						<form method="POST" class="colorlib-form">
+							<h2>CARD DETAILS</h2>
+		              	<div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<label for="cardno">Account No:</label>
+										<input type="number"  name='Account_no' id="cardno" class="form-control" placeholder="Enter The Account No: ">
+									</div>
+								</div>
+							<div class="col-md-12">
+									<div class="form-group">
+										<label for="name">Account Holders Name:</label>
+										<input type="text" id="name" class="form-control" placeholder="Enter The Account Holders Name ">
+									</div>
+								</div>
+			               <div class="col-md-12">
+									<div class="form-group">
+										<label for="Bank Name">Bank Name</label>
+			                    	<input type="text" id="Bank Name" class="form-control" placeholder="Enter The Bank Name">
+			                  </div>
+			               </div>
+                        </div>
+							<div class="col-md-12 text-center">
+							<button type="submit" class="btn btn-primary">PAY </button>
+							</div>
+                        </form>
+					</div>
+</div>
+
+</div>
+
+
+
+{% endblock %}
